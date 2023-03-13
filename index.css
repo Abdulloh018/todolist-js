@@ -1,0 +1,256 @@
+/* MAIN styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Supermercado One';
+}
+body {
+  min-height: 100vh;
+  background: rgb(77, 197, 77);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+.container {
+  min-width: 420px;
+  border-radius: 15px;
+  margin: auto;
+  min-height: 450px;
+  background: rgba(238, 201, 201, 0.863);
+  padding: 25px;
+}
+
+/* LOGO */
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title__img {
+  width: 90px;
+  height: 70px;
+}
+.title__content {
+  font-size: 20px;
+  text-transform: capitalize;
+  background: rgb(18, 131, 18);
+  display: flex;
+  border-radius: 20% 5% 20% 5%/5% 20% 25% 20%;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(3deg);
+  padding: 8px;
+}
+
+/* TODO LIST styles */
+
+.search {
+  width: 110px;
+  background: rgb(18, 131, 18);
+  display: block;
+  margin: 20px auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-block {
+  position: relative;
+  background: rgb(77, 197, 77);
+  padding: 25px;
+  border-radius: 15px;
+  width: 90%;
+  margin: 25px auto;
+}
+.search-block {
+  display: block;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 22px;
+}
+.search-block__btn-types {
+  width: 100%;
+  padding: 15px 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.filter__item {
+  position: relative;
+}
+.filter-radio {
+  width: 20px;
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  cursor: pointer;
+}
+.filter-label {
+  font-family: 'Abel';
+  font-weight: 700;
+  background: #fe7345;
+  padding: 5px 7px 7px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.todo-list {
+  margin-top: 30px;
+}
+
+/* TODO Item styles */
+
+.todo {
+  display: flex;
+  align-items: center;
+  padding: 5px 15px 5px 10px;
+  border-radius: 5px;
+  max-width: 90%;
+  margin: 10px auto;
+  cursor: pointer;
+}
+.todo__checkbox {
+  border: 2px solid #494a4b;
+  outline: none;
+}
+.todo__deleteBtn {
+  margin: 0 -8px 0 auto;
+  padding: 0 8px;
+  border: none;
+  background: none;
+  transform: rotate(45deg) scale(2);
+  cursor: pointer;
+  transition: 0.25s;
+}
+.todo__deleteBtn:hover {
+  color: rgb(114, 111, 111);
+}
+.todo__content {
+  font-family: 'Abel';
+  font-weight: 700;
+  padding: 5px 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.checkbox-btn {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.checkbox-btn__empty {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #494a4b;
+  padding: 5px;
+  border-radius: 3px;
+}
+.checkbox-btn__icon {
+  width: 20px;
+  height: 20px;
+  margin-top: -5px;
+  transform: scale(1.6);
+  margin-left: 5px;
+  display: none;
+}
+.none {
+  display: none !important;
+}
+.block {
+  display: block !important;
+}
+.completed {
+  background-color: rgb(18, 131, 18);
+}
+
+
+/* FORM */
+
+.form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.form__title {
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+form {
+  width: 90%;
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+input {
+  border: none;
+  background: none;
+  border-bottom: 4px dashed rgb(18, 131, 18);
+  margin-right: 20px;
+  width: 70%;
+  font-family: 'Abel';
+  font-weight: 700;
+  font-size: 16px;
+}
+input:focus {
+  outline: none;
+}
+input::placeholder {
+  font-weight: 500;
+}
+button {
+  height: 38px;
+  position: relative;
+  transform: rotate(4deg);
+  border-radius: 6px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-color: transparent;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+button:active {
+  height: 35px;
+  margin-top: 3px;
+  transform: translateY(4px);
+  padding-bottom: 0;
+}
+button:active::before {
+  transform: scaleY(1);
+}
+button span {
+  position: relative;
+  display: block;
+  font-size: 16.5px;
+  padding: 0.34em 0.84em;
+  border: 2px solid #494a4b;
+  border-radius: inherit;
+  background-color: #fff;
+}
+form button::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  width: 80px;
+  height: 100%;
+  transform: scaleY(1.1);
+  border: 1px solid #494a4b;
+  border-radius: inherit;
+  transform-origin: top;
+  background-image: url(data:image/png;base64,R0lGODlhBAAEAIABAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjEgNjQuMTQwOTQ5LCAyMDEwLzEyLzA3LTEwOjU3OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5NUY1OENCRDdDMDYxMUUyOTEzMEE1MEM5QzM0NDVBMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5NUY1OENCRTdDMDYxMUUyOTEzMEE1MEM5QzM0NDVBMyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjk1RjU4Q0JCN0MwNjExRTI5MTMwQTUwQzlDMzQ0NUEzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjk1RjU4Q0JDN0MwNjExRTI5MTMwQTUwQzlDMzQ0NUEzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAAAQAsAAAAAAQABAAAAgYEEpdoeQUAOw==);
+  background-color: #fe7345;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

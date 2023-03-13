@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abel&family=Supermercado+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <script defer src="./main.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="container">
+      <div class="title">
+        <img
+          src="https://todos-app-v2.vercel.app/img/note.75134fb0.svg"
+          alt=""
+          class="title__img"
+        />
+        <h1 class="title__content">to-do-list</h1>
+      </div>
+      <div class="form">
+        <h2 class="form__title">~ Today I need to ~</h2>
+        <form>
+          <input
+            type="text"
+            class="create-todo-input"
+            placeholder="Add new todo.."
+          />
+          <button type="submit" class="create-todo-btn">
+            <span>Submit</span>
+          </button>
+        </form>
+      </div>
+      <div class="search-block">
+        <span class="search-block__title">~ Search todo ~</span>
+        <div class="search-block__btn-types">
+          <div class="filter__item" data-sort-by="all">
+            <input type="radio" class="filter-radio" name="sort" id="1" />
+            <label for="1" class="filter-label">All</label>
+          </div>
+          <div class="filter__item" data-sort-by="completed">
+            <input type="radio" class="filter-radio" name="sort" id="2"/>
+            <label for="2" class="filter-label">Completed</label>
+          </div>
+          <div class="filter__item" data-sort-by="active">
+            <input type="radio" class="filter-radio" name="sort" id="3"/>
+            <label for="3" class="filter-label">Active</label>
+          </div>
+        </div>
+      </div>
+      <ul class="todo-list"></ul>
+    </main>
+  </body>
+</html>
