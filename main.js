@@ -6,12 +6,20 @@ const checkboxBtn = document.querySelector(".checkbox-btn__empty");
 const checkboxBtnIcon = document.querySelector(".checkbox-btn__icon");
 const sortButtons = document.querySelectorAll("[data-sort-by]");
 
-const todoItems = JSON.parse(localStorage.getItem("database"));
-if (!todoItems) {
-  localStorage.setItem("database", JSON.stringify([]));
-}
+const toggleData = function (key, value) {
+  if (value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  } else {
+    return JSON.parse(localStorage.getItem(key));
+  }
+};
 
-const savedSortOption = JSON.parse(localStorage.getItem("sort_by"));
+const todoItems = toggleData('database')
+if (!todoItems) {
+  toggleData('database', [])
+}
+console.log(todoItems, 'asdf');
+const savedSortOption = toggleData('sort_by')
 if (savedSortOption) {
   if (savedSortOption === "all") {
     renderTodo(todoItems);
@@ -23,14 +31,14 @@ if (savedSortOption) {
     renderTodo(filtered);
   }
 } else {
-  localStorage.setItem("sort_by", JSON.stringify("all"));
+  toggleData('sort_by', 'all')
   renderTodo(todoItems);
 }
 
 sortButtons.forEach((item) => {
   if (
     item.getAttribute("data-sort-by") ===
-    JSON.parse(localStorage.getItem("sort_by"))
+    savedSortOption
   ) {
     item.children[0].setAttribute("checked", true);
   }
@@ -38,21 +46,20 @@ sortButtons.forEach((item) => {
 
 sortButtons.forEach((item) => {
   item.addEventListener("click", () => {
-    const todos = JSON.parse(localStorage.getItem("database"));
+    const todos = toggleData('database')
     const sortOption = item.getAttribute("data-sort-by");
     if (sortOption === "all") {
-      localStorage.setItem("sort_by", JSON.stringify("all"));
+      toggleData('sort_by', 'all')
       renderTodo(todos);
     } else if (sortOption === "completed") {
-      localStorage.setItem("sort_by", JSON.stringify("completed"));
+      toggleData('sort_by', "completed")
       const filtered = todos.filter((todo) => todo.completed);
       renderTodo(filtered);
     } else {
-      localStorage.setItem("sort_by", JSON.stringify("active"));
+      toggleData('sort_by', 'active')
       const filtered = todos.filter((todo) => !todo.completed);
       renderTodo(filtered);
     }
-    console.log(sortOption, todos);
   });
 });
 
@@ -66,14 +73,14 @@ createTodoBtn.addEventListener("click", function (e) {
     completed: false,
   };
 
-  const todoItems = JSON.parse(localStorage.getItem("database"));
+  const todoItems = toggleData('database')
   if (inputValue) {
     if (todoItems.length) {
       todoItems.push(todo);
-      localStorage.setItem("database", JSON.stringify(todoItems));
+      toggleData('database', todoItems)
       renderSorts(todoItems);
     } else {
-      localStorage.setItem("database", JSON.stringify([todo]));
+      toggleData('database', [todo]);
       renderTodo([todo]);
     }
   }
@@ -81,7 +88,7 @@ createTodoBtn.addEventListener("click", function (e) {
 });
 
 const renderSorts = function (todos) {
-  const sortOption = JSON.parse(localStorage.getItem("sort_by"));
+  const sortOption = toggleData('sort_by')
   if (sortOption === "all") {
     renderTodo(todos);
   } else if (sortOption === "completed") {
@@ -91,7 +98,7 @@ const renderSorts = function (todos) {
     const filtered = todos.filter((todo) => !todo.completed);
     renderTodo(filtered);
   }
-}
+};
 
 function renderTodo(database) {
   todoList.innerHTML = "";
@@ -101,7 +108,6 @@ function renderTodo(database) {
       todoItem.classList.add("completed");
     }
     todoItem.classList.add("todo");
-    console.log(item);
 
     const completeChangeBtn = document.createElement("div");
     completeChangeBtn.classList.add("checkbox-btn");
@@ -117,12 +123,12 @@ function renderTodo(database) {
       completeChangeActiveBtn
     );
     completeChangeActiveBtn.addEventListener("click", () => {
-      const todos = JSON.parse(localStorage.getItem("database"));
+      const todos = toggleData('database')
       const activeTodo = todos.find((todo) => todo.title === item.title);
       activeTodo.completed = true;
-      localStorage.setItem("database", JSON.stringify(todos));
+      toggleData('database', todos)
 
-      renderSorts(todos)
+      renderSorts(todos);
     });
 
     const completeChangeCompleteBtn = document.createElement("span");
@@ -137,12 +143,12 @@ function renderTodo(database) {
     completeChangeCompleteBtn.innerText = "+";
 
     completeChangeCompleteBtn.addEventListener("click", () => {
-      const todos = JSON.parse(localStorage.getItem("database"));
+      const todos = toggleData('database')
       const activeTodo = todos.find((todo) => todo.title === item.title);
       activeTodo.completed = false;
       localStorage.setItem("database", JSON.stringify(todos));
 
-      renderSorts(todos)
+      renderSorts(todos);
     });
 
     const todoContent = document.createElement("span");
@@ -156,14 +162,15 @@ function renderTodo(database) {
     todoItem.insertAdjacentElement("beforeend", todoDeleteBtn);
 
     todoDeleteBtn.addEventListener("click", () => {
-      const todos = JSON.parse(localStorage.getItem("database"));
+      const todos = toggleData('database')
+      console.log(todos, todoItems);
       const index = todos.findIndex((todo) => todo.title === item.title);
       if (index > -1) {
         todos.splice(index, 1);
       }
       localStorage.setItem("database", JSON.stringify(todos));
 
-      renderSorts(todos)
+      renderSorts(todos);
     });
 
     todoDeleteBtn.innerText = "+";
