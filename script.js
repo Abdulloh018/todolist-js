@@ -6,19 +6,33 @@ const checkboxBtn = document.querySelector(".checkbox-btn__empty");
 const checkboxBtnIcon = document.querySelector(".checkbox-btn__icon");
 const sortButtons = document.querySelectorAll("[data-sort-by]");
 
+const loader = document.querySelector(".lds-hourglass");
+
+const loaderControl = function (show) {
+  if (show) {
+    loader.classList.remove("d-none");
+  } else {
+    loader.classList.add("d-none");
+  }
+};
+
 const API_URL = "https://64107fb8c3639725adb7ab0f.mockapi.io/api/todos";
 
 const getTodos = async function () {
   try {
+    loaderControl(true);
     const req = await fetch(API_URL);
     return await req.json();
   } catch (error) {
     console.log(error);
+  } finally {
+    loaderControl(false);
   }
 };
 
 const createTodo = async function (todo) {
   try {
+    loaderControl(true);
     await fetch(API_URL, {
       method: "POST",
       body: JSON.stringify(todo),
@@ -28,21 +42,27 @@ const createTodo = async function (todo) {
     });
   } catch (error) {
     console.log(error);
+  } finally {
+    loaderControl(false);
   }
 };
 
 const deleteTodo = async function (id) {
   try {
+    loaderControl(true);
     await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
     });
   } catch (error) {
     console.log(error);
+  } finally {
+    loaderControl(false);
   }
 };
 
 const updateTodo = async function (todo) {
   try {
+    loaderControl(true);
     await fetch(`${API_URL}/${todo.id}`, {
       method: "PUT",
       body: JSON.stringify(todo),
@@ -52,6 +72,8 @@ const updateTodo = async function (todo) {
     });
   } catch (error) {
     console.log(error);
+  } finally {
+    loaderControl(false);
   }
 };
 
@@ -83,10 +105,7 @@ if (savedSortOption) {
 }
 
 sortButtons.forEach((item) => {
-  if (
-    item.getAttribute("data-sort-by") ===
-    savedSortOption
-  ) {
+  if (item.getAttribute("data-sort-by") === savedSortOption) {
     item.children[0].setAttribute("checked", true);
   }
 });
@@ -96,13 +115,13 @@ sortButtons.forEach((item) => {
     const sortOption = item.getAttribute("data-sort-by");
     if (sortOption === "all") {
       toggleData("sort_by", "all");
-      renderTodo()
+      renderTodo();
     } else if (sortOption === "completed") {
       toggleData("sort_by", "completed");
-      renderTodo()
+      renderTodo();
     } else {
       toggleData("sort_by", "active");
-      renderTodo()
+      renderTodo();
     }
   });
 });
