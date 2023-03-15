@@ -17,8 +17,8 @@ const toggleData = function (key, value) {
 const todoItems = toggleData('database')
 if (!todoItems) {
   toggleData('database', [])
+  renderTodo([]);
 }
-console.log(todoItems, 'asdf');
 const savedSortOption = toggleData('sort_by')
 if (savedSortOption) {
   if (savedSortOption === "all") {
@@ -32,7 +32,6 @@ if (savedSortOption) {
   }
 } else {
   toggleData('sort_by', 'all')
-  renderTodo(todoItems);
 }
 
 sortButtons.forEach((item) => {
@@ -163,7 +162,6 @@ function renderTodo(database) {
 
     todoDeleteBtn.addEventListener("click", () => {
       const todos = toggleData('database')
-      console.log(todos, todoItems);
       const index = todos.findIndex((todo) => todo.title === item.title);
       if (index > -1) {
         todos.splice(index, 1);
